@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<header>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Facebook</title>
     <link rel="stylesheet" href="style.css">
-</header>
+</head>
 <body>
-    <div class="container">
-
-        <nav class="navbar">
+    <header>
+        <div class="navbar">
             <div class="nav_1">
                 <h1>The Facebook</h1>
             </div>
@@ -23,9 +22,10 @@
                     <li><a href="log_out.html">Log out</a></li>
                 </ul>
             </nav>
-        </nav>
-        <div class="divider_1"></div>
-
+        </div>
+    </header>
+        <hr class="divider_1"></hr>
+ <main>
         <aside class="sidebar">
             <section class="search_input">
                 <input type="text" placeholder="Search" class="search-input_search">
@@ -46,33 +46,42 @@
         </aside>
 
         <article class="profile">
-            <figure class="name_pro">
-                <img src="images/pro.jpg" class="pro" alt="pro">
-                <h2 class="name">Nyamdelger <br>Altankhuyag</h2>
-            </figure>
-            <div class="divider_2"></div>
-            <section class="inf">
-                <section class="inf_text">
-                    <p class="big_text">Name:</p>
-                    <p class="sma_text">Nyamdelger</p>
-                </section>
-                <section class="inf_text">
-                    <p class="big_text">Member Since:</p>
-                    <p class="sma_text">March 28, 2002</p>
-                </section>
-                <section class="inf_text">
-                    <p class="big_text">University:</p>
-                    <p class="sma_text">National University of Mongolia</p>
-                </section>
-                <section class="inf_text">
-                    <p class="big_text">Email:</p>
-                    <p class="sma_text">Nyamdelger99118811@gmail.com</p>
-                </section>
-                <section class="inf_text">
-                    <p class="big_text">Phone:</p>
-                    <p class="sma_text">99101696</p>
-                </section>
+            <section class="name_pro">
+                <figure class="profile_figure">
+                    <img src="images/pro.jpg" class="pro" alt="Profile Picture">
+                    <figcaption class="name">
+                        <h2>Nyamdelger <br>Altankhuyag</h2>
+                    </figcaption>
+                </figure>
             </section>
+        </article>
+        
+           
+        <section class="inf">
+            <dl class="inf_list">
+                <div class="inf_text">
+                    <dt class="big_text">Name:</dt>
+                    <dd class="sma_text">Nyamdelger</dd>
+                </div>
+                <div class="inf_text">
+                    <dt class="big_text">Member Since:</dt>
+                    <dd class="sma_text">March 28, 2002</dd>
+                </div>
+                <div class="inf_text">
+                    <dt class="big_text">University:</dt>
+                    <dd class="sma_text">National University of Mongolia</dd>
+                </div>
+                <div class="inf_text">
+                    <dt class="big_text">Email:</dt>
+                    <dd class="sma_text">Nyamdelger99118811@gmail.com</dd>
+                </div>
+                <div class="inf_text">
+                    <dt class="big_text">Phone:</dt>
+                    <dd class="sma_text">99101696</dd>
+                </div>
+            </dl>
+        </section>
+        
             <aside class="right">
                 <section class="right_1">
                    <p class="right_1_t">Connection</p>
@@ -89,7 +98,7 @@
                 </section>
             </aside>
         </article>
-
+    </main>
     </div>
 </body>
 </html>

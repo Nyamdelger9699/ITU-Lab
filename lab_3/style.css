@@ -199,19 +199,27 @@ nav ul li a:hover {
     padding: 20px;
 }
 
-.name {
-    color: #000000;
-    font-size: 36px;
-    font-weight: normal;
-    margin-bottom: 10px;
+.profile_figure {
+    display: flex;
+    align-items: center; /* Align image and text vertically */
 }
 
 .pro {
-    width: 150px;
-    height: 150px;
-    border-radius: 100%;
-    margin: 2px 0;
+    width: 100px; /* Adjust image size as needed */
+    height: 100px; /* Make the image a square */
+    border-radius: 50%; /* Optional: make it circular */
+    margin-right: 15px; /* Add space between the image and the text */
 }
+
+.name {
+    color: #000000;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0; /* Remove extra margin around the text */
+}
+
+
+
 
 .inf {
     display: flex;
@@ -221,8 +229,8 @@ nav ul li a:hover {
     top: 40px;
     display: flex;
     align-items: flex-start;
-    gap: 5px;
-    margin-top: 290px;
+    gap: 1px;
+    margin-top: 230px;
     width: 400px;
     height: auto;
     padding: 20px;
@@ -255,13 +263,7 @@ nav ul li a:hover {
     margin-top: 130px;
 }
 
-.divider_2 {
-    height: 1px;
-    background-color: #1877f2;
-    margin: 170px 0;
-    margin-left: 0;
-    width: 450px;
-}
+
 
 .right {
     display: flex;
