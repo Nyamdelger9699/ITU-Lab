@@ -1,15 +1,69 @@
-<!DOCTYPE html>
-<html lang="mn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Color жишээ</title>
-</head>
-<body>
-    <form>
-        <label>ungu:
-        <input type="week">
-        </label>
-    </form>
-</body>
-</html>
+clc
+close all
+img=imread('arag.tif');
+if(size(img,3)==3)
+input=rgb2gray(img)
+else
+input=img;
+end
+
+input1=double(input);
+a=input;
+subplot(2,4,1), imshow(a);
+mask=[0 1 0; 1 -4 1; 0 1 0];
+b=input1;
+for i=2:size(input,1)-2
+for j=2:size(input,2)-2
+b(i,j)=sum(sum(input(i-1:i+1, j-1:j+1).*mask));
+end
+end
+minB=min(min(b));
+if(minB>0)
+b=b-minB;
+elseb=b-minB;
+end
+maxB=max(max(b));
+b=b/maxB;
+b=b*255;
+subplot(2,4,2), imshow(uint8(b));
+c=input1+b;
+subplot(2,4,5), imhshow(uint8(c));
+kx=[1,0,-1;2,0,-2;1,0,-1];
+ky=[1,2,1;0,0,0;-1,-2,-1];
+H=conv2(im2double(input),kx,'same');
+V=conv2(im2double(input), ky, 'same');
+d=sqrt(H.*H+V.*V);
+subplot(2,4,6), imshow(d,[]);
+e=double(zeros(800,500));
+
+
+
+
+clc
+close all 
+img=imread(car.tif);
+if(size(img,3)==3)
+a=rgb2rgay(img);
+else
+a=img;
+end
+notchcenters=[55 45;55 85; 55 165; 55 203; 115 45; 112 80; 115 165; 115 203;];
+sigmas=[25 25 25 15 25 25 25 90];
+a=im2double(a);
+subplot(1, 4, 1), imshow(a);
+[height, width]=size(a);
+b=ifftshift(fft2(a));
+c=abs(b);
+subplot(1,4,2), imshow(log(c), [0 10 ])
+[o_x, o_y]=meshgrid(1:width, 1:height);
+d=ones(size(o_x));
+for n=1:size(notchcenters,1)
+r=(o_x-notchCenters(n,1)).^2+(o_y-notchCenters(n,2)).^2;
+d=d.*(1-exp(-r/sigmas(n)^2));
+end
+e=b.*d;
+f=abs(e);
+subplot(1,4,3),imshow(log(f),[0 10]);
+g=real(ifft2(ifftshift(e)));
+g=max(0,min(1,g));
+subplot(1,4,4), imshow(g);
