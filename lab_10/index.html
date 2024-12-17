@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .news-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-item a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .news-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>News Blog</h1>
+    <div id="news-list"></div>
+
+    <script>
+        // Function to fetch and display RSS feed
+        function fetchRSSFeed() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://ikon.mn/rss", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const xmlData = xhr.responseXML;
+                    const items = xmlData.getElementsByTagName("item");
+                    const newsList = document.getElementById("news-list");
+
+                    // Loop through RSS items and display them
+                    for (let i = 0; i < items.length; i++) {
+                        const title = items[i].getElementsByTagName("title")[0].textContent;
+                        const link = items[i].getElementsByTagName("link")[0].textContent;
+                        const description = items[i].getElementsByTagName("description")[0].textContent;
+
+                        // Create news item div
+                        const newsItem = document.createElement("div");
+                        newsItem.classList.add("news-item");
+
+                        // Add title and link
+                        const newsTitle = document.createElement("a");
+                        newsTitle.href = `news.html?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`;
+                        newsTitle.textContent = title;
+                        newsTitle.target = "_blank";
+
+                        // Add description
+                        const newsDescription = document.createElement("p");
+                        newsDescription.textContent = description;
+
+                        // Append elements to the news item
+                        newsItem.appendChild(newsTitle);
+                        newsItem.appendChild(newsDescription);
+
+                        // Append news item to the news list
+                        newsList.appendChild(newsItem);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        // Fetch the RSS feed on page load
+        fetchRSSFeed();
+    </script>
+</body>
+</html>

@@ -14,7 +14,8 @@
         }
         h1 {
             text-align: center;
-            color: #4CAF50;
+            color: crimson;
+            font-size: 3rem;
         }
         .hangman {
             text-align: center;
@@ -24,37 +25,45 @@
             border-radius: 8px;
             background-color: #fff;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            max-width: 900px;
         }
         .hangman img {
-            max-width: 150px;
+            width: 80%;
+            max-width: 300px;
+            height: auto;
             margin-bottom: 15px;
         }
         .word-display {
-            font-size: 1.5em;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+            color: #333;
         }
         .hint {
-            margin-bottom: 15px;
-            font-size: 1em;
+            margin-bottom: 20px;
+            font-size: 1.2em;
             color: #555;
         }
         .letters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 10px;
         }
         .letters button {
-            margin: 3px;
-            padding: 10px 15px;
-            background-color: #4CAF50;
+            margin: 5px;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            background-color: crimson;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .letters button:hover {
-            background-color: #45a049;
+            background-color:crimson;
+            transform: scale(1.1);
         }
         .letters button:disabled {
             background-color: #ddd;
@@ -63,14 +72,30 @@
         }
         .result {
             font-weight: bold;
-            margin-top: 15px;
+            margin-top: 20px;
+            font-size: 1.5rem;
             color: #333;
         }
         .result.success {
-            color: #4CAF50;
+            color: crimson;
         }
         .result.error {
             color: #f44336;
+        }
+        .start-button {
+            background-color: crimson;
+            color: #fff;
+            border: none;
+            padding: 20px 30px;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+        .start-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -84,7 +109,7 @@
         <div id="hangman-lives">Амь: 5</div>
         <div class="letters" id="letters"></div>
         <div id="hangman-result" class="result"></div>
-        <button onclick="startHangman()">Тоглоом эхлүүлэх</button>
+        <button class="start-button" onclick="startHangman()">Тоглоом эхлүүлэх</button>
     </div>
 
     <script>
@@ -152,11 +177,11 @@
 
             const hangmanImage = document.getElementById('hangman-image');
             const gifs = [
-                "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzRrMDIwZnY5dGZpczh3dW9sMGRxb2k5N3g3dGM5dGg0dWllbDNtYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mt7rcznFdEQHKghqCI/giphy.webp", // 0 алдаа
-                "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWQ0M3lobzFmM3h3NGg1c3BoZ3p4MmgwNjQ1bWt6emdiMDhtMTNudCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/eCjG7xWIJQRtpO9dah/giphy.webp", // 1 алдаа
-                "https://media0.giphy.com/media/4HrLxAJqT8EftF2VU6/200.webp?cid=790b7611cagyn11jeli6ybaozelmdtz7t5220emctpaz1zgl&ep=v1_gifs_search&rid=200.webp&ct=g", // 2 алдаа
-                "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3MxeTNleWl0ZDNlcGQxdmpvaGJ0amU1dXB3Y3h6OTNmZncwZzZieCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AE7Qa6j57XuRzeMkgh/200.webp", // 3 алдаа
-                "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDFxdTZzMXo0bXI2M3E0bGxjNHg0ZHVmcG80OW9keDhyOTc2ZWpjaiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ANXaQJBRaIdhJxwyYy/200.webp", // 4 алдаа
+                "https://media4.giphy.com/media/WMWLBO3Vyv6xOpEGaJ/giphy.webp?cid=ecf05e47nwb8gxrxf6gvqrwlop4zlpey2ppysgrr7rfreoc1&ep=v1_gifs_search&rid=giphy.webp&ct=g", // 0 алдаа
+                "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWt6Y2h1d2RvMzBuMWxjOHY3N3JsNWdrYmVybDVtZWFtMjBxZXhpYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/eCjG7xWIJQRtpO9dah/giphy.webp", // 1 алдаа
+                "https://media2.giphy.com/media/U7d8PaktFqJQuMVUAs/200.webp?cid=790b7611dt2mdinmpn2kip68khu60d62pqx107flj9wpvmix&ep=v1_gifs_search&rid=200.webp&ct=g", // 2 алдаа
+                "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExODRoMWI3YmdzNGJ3YzUzaTRjb25uY3I1NTY4b2F1bjV0bGhkOTUzeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AE7Qa6j57XuRzeMkgh/200.webp", // 3 алдаа
+                "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3J6ZWx3bzF1eXJ4bmF0amp1dGlxcjI5MTg4bHVuZnhoMzFmd3JjYiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ANXaQJBRaIdhJxwyYy/200.webp", // 4 алдаа
                 "https://media0.giphy.com/media/biJ1jmq9woBMI/200.webp?cid=ecf05e47reyu08o37gole71sn97vaobxkk05ovyc77ycwthe&ep=v1_gifs_search&rid=200.webp&ct=g"  // 5 алдаа
             ];
             hangmanImage.src = gifs[5 - lives];

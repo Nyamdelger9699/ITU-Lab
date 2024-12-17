@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .task {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .task h2 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        label, input, button {
+            display: block;
+            margin: 5px 0;
+        }
+        input {
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        .result.success {
+            color: #4CAF50;
+        }
+        .result.error {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <h1>LAB-8</h1>
+
+    
+    <div class="task">
+        <h2>1. Палиндром шалгах</h2>
+        <label for="number1">Тоог оруулна уу:</label>
+        <input type="number" id="number1">
+        <button onclick="runTask(1)">Шалгах</button>
+        <div class="result" id="result1"></div>
+    </div>
+
+    
+    <div class="task">
+        <h2>2. Чоно туулайг гүйцэх хугацаа</h2>
+        <label for="distance">Зайг оруулна уу (км):</label>
+        <input type="number" id="distance" step="0.1">
+        <button onclick="runTask(2)">Тооцоолох</button>
+        <div class="result" id="result2"></div>
+    </div>
+
+    
+    <div class="task">
+        <h2>3. Байшингийн орц, давхар, хаалга</h2>
+        <label for="apartmentNumber">Тоотыг оруулна уу:</label>
+        <input type="number" id="apartmentNumber">
+        <button onclick="runTask(3)">Тооцоолох</button>
+        <div class="result" id="result3"></div>
+    </div>
+
+    
+    <div class="task">
+        <h2>4. Хамгийн бага ерөнхий хуваагдагдагч</h2>
+        <label for="arrayNumbers">5 тоог оруулна уу (зайгаар тусгаарлана):</label>
+        <input type="text" id="arrayNumbers">
+        <button onclick="runTask(4)">Олох</button>
+        <div class="result" id="result4"></div>
+    </div>
+
+    
+    <div class="task">
+        <h2>5. Өглөө ба орой тооцоолол</h2>
+        <label for="number5">Тоог оруулна уу:</label>
+        <input type="number" id="number5" step="0.1">
+        <button onclick="runTask(5)">Тооцоолох</button>
+        <div class="result" id="result5"></div>
+    </div>
+
+    <script>
+        function runTask(taskNumber) {
+            switch (taskNumber) {
+                case 1:
+                    checkPalindrome();
+                    break;
+                case 2:
+                    calculateCatchTime();
+                    break;
+                case 3:
+                    findApartmentDetails();
+                    break;
+                case 4:
+                    findLCM();
+                    break;
+                case 5:
+                    calculateBasedOnTime();
+                    break;
+                default:
+                    console.error("Unknown task number");
+            }
+        }
+
+        // palindrom
+        function checkPalindrome() {
+            const num = document.getElementById('number1').value;
+            const digitSum = [...num].reduce((acc, digit) => acc + parseInt(digit), 0);
+            const isPalindrome = digitSum.toString() === [...digitSum.toString()].reverse().join('');
+            const result = document.getElementById('result1');
+            result.textContent = isPalindrome ? 'Палиндром байна.' : 'Палиндром биш байна.';
+            result.className = isPalindrome ? 'result success' : 'result error';
+        }
+
+        // chono tuulaig guitseh
+        function calculateCatchTime() {
+            const distance = parseFloat(document.getElementById('distance').value);
+            const wolfSpeed = 25;
+            const rabbitSpeed = 18;
+            const relativeSpeed = wolfSpeed - rabbitSpeed;
+
+            const result = document.getElementById('result2');
+            if (relativeSpeed <= 0) {
+                result.textContent = 'Чоно туулайг гүйцэхгүй.';
+                result.className = 'result error';
+                return;
+            }
+
+            const timeInHours = distance / relativeSpeed;
+            const timeInMinutes = timeInHours * 60;
+            const minutes = Math.floor(timeInMinutes);
+            const seconds = Math.round((timeInMinutes - minutes) * 60);
+
+            result.textContent = `${minutes} минут ${seconds} секунд.`;
+            result.className = 'result success';
+        }
+
+        // orts haalga
+        function findApartmentDetails() {
+            const apartmentNumber = parseInt(document.getElementById('apartmentNumber').value);
+            const apartmentsPerFloor = 4;
+            const floorsPerEntrance = 9;
+            const totalApartmentsPerEntrance = apartmentsPerFloor * floorsPerEntrance;
+
+            const entrance = Math.ceil(apartmentNumber / totalApartmentsPerEntrance);
+            const remaining = apartmentNumber % totalApartmentsPerEntrance || totalApartmentsPerEntrance;
+            const floor = Math.ceil(remaining / apartmentsPerFloor);
+            const door = remaining % apartmentsPerFloor || apartmentsPerFloor;
+
+            const result = document.getElementById('result3');
+            result.textContent = `${entrance}-р орц, ${floor}-р давхар, ${door}-р хаалга.`;
+            result.className = 'result success';
+        }
+
+        // LCM
+        function gcd(a, b) {
+            return b === 0 ? a : gcd(b, a % b);
+        }
+
+        function lcm(a, b) {
+            return (a * b) / gcd(a, b);
+        }
+
+        function findLCM() {
+            const numbers = document.getElementById('arrayNumbers').value.split(' ').map(Number);
+            const result = numbers.reduce((acc, num) => lcm(acc, num), 1);
+            const output = document.getElementById('result4');
+            output.textContent = `Хамгийн бага ерөнхий хуваагдагч: ${result}`;
+            output.className = 'result success';
+        }
+
+        // uglu oroi
+        function calculateBasedOnTime() {
+            const num = parseFloat(document.getElementById('number5').value);
+            const currentHour = new Date().getHours();
+
+            const result = document.getElementById('result5');
+            if (currentHour < 12) {
+                result.textContent = `Өглөө байна. ${num}-ын 2 зэрэг: ${Math.pow(num, 2)}`;
+                result.className = 'result success';
+            } else {
+                result.textContent = `Орой байна. ${num}-ын язгуур: ${Math.sqrt(num)}`;
+                result.className = 'result success';
+            }
+        }
+    </script>
+</body>
+</html>
